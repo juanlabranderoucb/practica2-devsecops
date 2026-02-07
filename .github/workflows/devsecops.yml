@@ -22,6 +22,29 @@ jobs:
         node-version: 20
 
     # =========================
+    # 5.5 Create .env files (CI)
+    # =========================
+    - name: Create env files for Docker Compose
+      run: |
+        # Backend services
+        cp backend/users-service/.env.example backend/users-service/.env
+        cp backend/academic-service/.env.example backend/academic-service/.env
+        cp backend/api-gateway/.env.example backend/api-gateway/.env
+
+        echo "DB_HOST=${{ secrets.USERS_DB_HOST }}" >> backend/users-service/.env
+        echo "DB_USER=${{ secrets.USERS_DB_USER }}" >> backend/users-service/.env
+        echo "DB_PASSWORD=${{ secrets.USERS_DB_PASSWORD }}" >> backend/users-service/.env
+
+        echo "DB_HOST=${{ secrets.ACADEMIC_DB_HOST }}" >> backend/academic-service/.env
+        echo "DB_USER=${{ secrets.ACADEMIC_DB_USER }}" >> backend/academic-service/.env
+        echo "DB_PASSWORD=${{ secrets.ACADEMIC_DB_PASSWORD }}" >> backend/academic-service/.env
+
+        echo "USERS_SERVICE_URL=http://users-service:3001" >> backend/api-gateway/.env
+        echo "ACADEMIC_SERVICE_URL=http://academic-service:3002" >> backend/api-gateway/.env
+        # Frontend (build/test time)
+        cp frontend/.env.example frontend/.env
+        echo "VITE_API_URL=http://api-gateway:3000" >> frontend/.env
+    # =========================
     # 3. Install & Test Backend
     # =========================
     - name: Install & Test users-service
@@ -70,29 +93,14 @@ jobs:
         cd backend/api-gateway
         semgrep --config=auto --severity=ERROR
     
-    # =========================
-    # 5.5 Create .env files (CI)
-    # =========================
-    - name: Create env files for Docker Compose
-      run: |
-        # Backend services
-        cp backend/users-service/.env.example backend/users-service/.env
-        cp backend/academic-service/.env.example backend/academic-service/.env
-        cp backend/api-gateway/.env.example backend/api-gateway/.env
-
-        echo "DB_HOST=${{ secrets.USERS_DB_HOST }}" >> backend/users-service/.env
-        echo "DB_USER=${{ secrets.USERS_DB_USER }}" >> backend/users-service/.env
-        echo "DB_PASSWORD=${{ secrets.USERS_DB_PASSWORD }}" >> backend/users-service/.env
-
-        echo "DB_HOST=${{ secrets.ACADEMIC_DB_HOST }}" >> backend/academic-service/.env
-        echo "DB_USER=${{ secrets.ACADEMIC_DB_USER }}" >> backend/academic-service/.env
-        echo "DB_PASSWORD=${{ secrets.ACADEMIC_DB_PASSWORD }}" >> backend/academic-service/.env
-
-        echo "USERS_SERVICE_URL=http://users-service:3001" >> backend/api-gateway/.env
-        echo "ACADEMIC_SERVICE_URL=http://academic-service:3002" >> backend/api-gateway/.env
-        cp frontend/.env.example frontend/.env
-        echo "VITE_API_URL=http://api-gateway:3000" >> frontend/.env
         
+    - name: Validate env files
+      run: |
+        ls -la backend/users-service
+        ls -la backend/academic-service
+        ls -la backend/api-gateway
+        ls -la frontend
+
     # =========================
     # 6. Docker Build
     # =========================
