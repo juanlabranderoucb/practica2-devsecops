@@ -9,8 +9,8 @@ services:
     container_name: users-service
     env_file:
       - ./users-service/.env
-    expose:
-      - "3001"
+    ports:
+      - "3001:3001"
     networks:
       - backend-net
 
@@ -23,8 +23,8 @@ services:
     container_name: academic-service
     env_file:
       - ./academic-service/.env
-    expose:
-      - "3002"
+    ports:
+      - "3002:3002"
     networks:
       - backend-net
   # =========================
