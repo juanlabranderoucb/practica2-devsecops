@@ -4,7 +4,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install && npm prune --production
+RUN npm install && npm prune --production && find node_modules -name 'package.json' -delete
 
 # Production stage
 FROM node:20-alpine
