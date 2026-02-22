@@ -6,6 +6,7 @@ COPY package*.json ./
 RUN npm install --omit=dev
 
 COPY . .
+RUN rm -f package-lock.json
 
 EXPOSE 3000
 CMD ["node", "src/server.js"]
