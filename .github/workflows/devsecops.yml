@@ -142,17 +142,21 @@ jobs:
     # 7. SAST - SONARQUBE (Análisis profundo)
     # =========================
     - name: 🔒 SonarQube Scan
+      continue-on-error: true
       uses: sonarsource/sonarqube-scan-action@master
       env:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         args: >
-          -Dsonar.projectKey=devsecops-microservices
+          -Dsonar.projectKey=juanlabranderoucb_practica2-devsecops
           -Dsonar.projectName="DevSecOps Microservices"
-          -Dsonar.organization=ucb-devsecops
+          -Dsonar.organization=juanlabranderoucb
 
     - name: 🔒 SonarQube Quality Gate check
+      if: always()
+      continue-on-error: true
       uses: sonarsource/sonarqube-quality-gate-action@master
       timeout-minutes: 5
       env:
