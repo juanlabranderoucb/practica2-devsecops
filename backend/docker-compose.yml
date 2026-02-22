@@ -7,10 +7,8 @@ services:
     image: users-service:latest
     build: ./users-service
     container_name: users-service
-    env_file:
-      - ./users-service/.env
-    expose:
-      - "3001"
+    ports:
+      - "3001:3001"
     networks:
       - backend-net
 
@@ -21,10 +19,8 @@ services:
     image: academic-service:latest
     build: ./academic-service
     container_name: academic-service
-    env_file:
-      - ./academic-service/.env
-    expose:
-      - "3002"
+    ports:
+      - "3002:3002"
     networks:
       - backend-net
   # =========================
@@ -46,6 +42,7 @@ services:
   # FRONTEND (React SPA)
   # =========================
   frontend:
+    image: frontend:latest
     build: ../frontend    
     container_name: frontend
     ports:

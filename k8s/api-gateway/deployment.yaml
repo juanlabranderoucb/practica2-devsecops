@@ -13,8 +13,16 @@ spec:
       labels:
         app: api-gateway
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: api-gateway
           image: api-gateway:latest
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

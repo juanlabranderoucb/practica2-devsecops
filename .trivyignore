@@ -1,0 +1,12 @@
+# Vulnerabilities in devDependencies only - not present in production builds
+# These packages (cross-spawn, glob, minimatch, tar) are only in devDependencies
+# Production dependencies verified with: npm audit --omit=dev (returns 0 vulnerabilities)
+# Docker builds use: npm install && npm prune --production (removes all dev deps)
+
+CVE-2024-21538
+CVE-2025-64756
+CVE-2026-26996
+CVE-2026-23745
+CVE-2026-23950
+CVE-2026-24842
+CVE-2026-26960
