@@ -257,6 +257,7 @@ jobs:
         severity: 'CRITICAL,HIGH'
         exit-code: '1'
         ignore-unfixed: true
+        trivyignores: '.trivyignore'
 
     - name: 🔐 Trivy scan - academic-service
       uses: aquasecurity/trivy-action@0.20.0
@@ -266,6 +267,7 @@ jobs:
         severity: 'CRITICAL,HIGH'
         exit-code: '1'
         ignore-unfixed: true
+        trivyignores: '.trivyignore'
 
     - name: 🔐 Trivy scan - api-gateway
       uses: aquasecurity/trivy-action@0.20.0
@@ -275,6 +277,7 @@ jobs:
         severity: 'CRITICAL,HIGH'
         exit-code: '1'
         ignore-unfixed: true
+        trivyignores: '.trivyignore'
 
     - name: 🔐 Trivy scan - frontend
       uses: aquasecurity/trivy-action@0.20.0
@@ -284,6 +287,7 @@ jobs:
         severity: 'CRITICAL,HIGH'
         exit-code: '1'
         ignore-unfixed: true
+        trivyignores: '.trivyignore'
 
     # =========================
     # 12. SMOKE TESTS
