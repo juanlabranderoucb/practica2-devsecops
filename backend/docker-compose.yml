@@ -7,8 +7,6 @@ services:
     image: users-service:latest
     build: ./users-service
     container_name: users-service
-    env_file:
-      - ./users-service/.env
     ports:
       - "3001:3001"
     networks:
@@ -21,8 +19,6 @@ services:
     image: academic-service:latest
     build: ./academic-service
     container_name: academic-service
-    env_file:
-      - ./academic-service/.env
     ports:
       - "3002:3002"
     networks:
