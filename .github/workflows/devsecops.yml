@@ -295,7 +295,7 @@ jobs:
     - name: 🚀 Start services with docker-compose
       run: |
         cd backend
-        docker-compose up -d
+        docker compose up -d
         sleep 20
 
     - name: 🧪 Smoke test - users-service
@@ -325,7 +325,7 @@ jobs:
       if: always()
       run: |
         cd backend
-        docker-compose down -v || true
+        docker compose down -v || true
         docker system prune -f || true
 
     # =========================
