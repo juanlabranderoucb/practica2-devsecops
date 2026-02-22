@@ -149,11 +149,8 @@ jobs:
       with:
         args: >
           -Dsonar.projectKey=devsecops-microservices
+          -Dsonar.projectName=DevSecOps Microservices
           -Dsonar.organization=ucb-devsecops
-          -Dsonar.sources=backend,frontend/src
-          -Dsonar.tests=backend/users-service/__tests__,backend/academic-service/__tests__,backend/api-gateway/__tests__,frontend/__tests__
-          -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**,**/coverage/**
-          -Dsonar.javascript.lcov.reportPaths=backend/users-service/coverage/lcov.info,backend/academic-service/coverage/lcov.info,backend/api-gateway/coverage/lcov.info,frontend/coverage/lcov.info
 
     - name: 🔒 SonarQube Quality Gate check
       uses: sonarsource/sonarqube-quality-gate-action@master
