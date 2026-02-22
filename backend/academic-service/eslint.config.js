@@ -22,13 +22,29 @@ module.exports = [
     },
     rules: {
       ...js.configs.recommended.rules,
-      'no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      'no-unused-vars': ['error', { caughtErrorsIgnorePattern: '^_' }],
       'no-console': 'off',
       'no-eval': 'error',
       'no-implied-eval': 'error',
       'no-new-func': 'error',
       'no-var': 'error',
       'prefer-const': 'error',
+    }
+  },
+  {
+    files: ['**/*.test.js'],
+    languageOptions: {
+      globals: {
+        test: 'readonly',
+        expect: 'readonly',
+        describe: 'readonly',
+        it: 'readonly',
+        beforeEach: 'readonly',
+        afterEach: 'readonly',
+        beforeAll: 'readonly',
+        afterAll: 'readonly',
+        jest: 'readonly',
+      }
     }
   }
 ];
