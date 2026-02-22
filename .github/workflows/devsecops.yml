@@ -149,7 +149,7 @@ jobs:
       with:
         args: >
           -Dsonar.projectKey=devsecops-microservices
-          -Dsonar.projectName=DevSecOps Microservices
+          -Dsonar.projectName="DevSecOps Microservices"
           -Dsonar.organization=ucb-devsecops
 
     - name: 🔒 SonarQube Quality Gate check
