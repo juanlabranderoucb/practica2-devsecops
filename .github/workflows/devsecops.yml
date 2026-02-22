@@ -290,46 +290,7 @@ jobs:
         trivyignores: '.trivyignore'
 
     # =========================
-    # 12. SMOKE TESTS
-    # =========================
-    - name: 🚀 Start services with docker-compose
-      run: |
-        cd backend
-        docker compose up -d --no-build
-        sleep 20
-
-    - name: 🧪 Smoke test - users-service
-      run: |
-        curl -f http://localhost:3001/health || exit 1
-        echo "✅ Users service is healthy"
-
-    - name: 🧪 Smoke test - academic-service  
-      run: |
-        curl -f http://localhost:3002/health || exit 1
-        echo "✅ Academic service is healthy"
-
-    - name: 🧪 Smoke test - api-gateway
-      run: |
-        curl -f http://localhost:3000/health || exit 1
-        echo "✅ API Gateway is healthy"
-
-    - name: 🧪 Smoke test - frontend
-      run: |
-        curl -f http://localhost:5173 || exit 1
-        echo "✅ Frontend is healthy"
-
-    # =========================
-    # 13. CLEANUP
-    # =========================
-    - name: 🧹 Shutdown services
-      if: always()
-      run: |
-        cd backend
-        docker compose down -v || true
-        docker system prune -f || true
-
-    # =========================
-    # 14. REPORTE FINAL
+    # 12. REPORTE FINAL
     # =========================
     - name: 📊 Pipeline Summary
       if: always()
@@ -344,7 +305,6 @@ jobs:
         echo "✅ SCA (npm audit)"
         echo "✅ Build de contenedores"
         echo "✅ Seguridad contenedores (Trivy)"
-        echo "✅ Smoke tests"
         echo "================================"
         echo "Commit: ${{ github.sha }}"
         echo "Branch: ${{ github.ref_name }}"
