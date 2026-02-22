@@ -1,12 +1,21 @@
-FROM node:20-alpine
+# Build stage
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
 RUN npm install --omit=dev
 
-COPY . .
-RUN rm -f package-lock.json
+# Production stage
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Copy only node_modules from builder
+COPY --from=builder /app/node_modules ./node_modules
+
+# Copy only source code (not package files)
+COPY src ./src
 
 EXPOSE 3002
 CMD ["node", "src/server.js"]
