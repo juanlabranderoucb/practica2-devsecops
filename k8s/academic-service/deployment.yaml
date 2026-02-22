@@ -13,8 +13,16 @@ spec:
       labels:
         app: academic-service
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: academic-service
           image: academic-service:latest
           ports:
             - containerPort: 3002
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"

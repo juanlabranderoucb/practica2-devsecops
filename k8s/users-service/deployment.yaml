@@ -13,9 +13,17 @@ spec:
       labels:
         app: users-service
     spec:
+      automountServiceAccountToken: false
       containers:
         - name: users-service
           image: users-service:latest
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 3001
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
